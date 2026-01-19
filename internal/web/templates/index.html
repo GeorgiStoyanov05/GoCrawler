@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Search</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        form { margin-bottom: 20px; }
+        .gallery { display: flex; flex-wrap: wrap; gap: 20px; }
+        .item { text-align: center; }
+    </style>
+</head>
+<body>
+
+<h1>Search Images</h1>
+
+<form method="GET" action="/">
+    <input type="text" name="url" placeholder="Original URL contains...">
+    <input type="text" name="filename" placeholder="Filename contains...">
+    <select name="format">
+        <option value="">Any format</option>
+        <option value="image/jpeg">JPEG</option>
+        <option value="image/png">PNG</option>
+        <option value="image/gif">GIF</option>
+        <option value="image/svg+xml">SVG</option>
+    </select>
+    <button type="submit">Search</button>
+</form>
+
+<div class="gallery">
+    {{range .Results}}
+    <div class="item">
+        <a href="/{{.FullImage}}" target="_blank">
+            <img src="/{{.Thumbnail}}" width="200">
+        </a>
+        <div>{{.Filename}}</div>
+        <div>{{.Format}}</div>
+    </div>
+    {{end}}
+</div>
+
+</body>
+</html>
